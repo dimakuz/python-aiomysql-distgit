@@ -29,11 +29,9 @@ BuildRequires:  python%{python3_pkgversion}-pytest >= 2.8
 %setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
 
 %build
-%py2_build
 %py3_build
 
 %install
-%py2_install
 %py3_install
 
 %clean
