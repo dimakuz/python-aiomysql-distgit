@@ -7,7 +7,7 @@ Summary:        aiomysql is a "driver" for accessing a MySQL database from the a
 
 License:        MIT
 URL:            https://github.com/aio-libs/aiomysql
-Source0:        %{url}/archive/v%{version}.tar.gz
+Source0:        %{url}/archive/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
 %global _description \
