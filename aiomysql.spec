@@ -39,7 +39,7 @@ Python 3 version.
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst CHANGES.txt
-%{python3_sitelib}/aiomysql-*.dist-info/
+%{python3_sitelib}/aiomysql-*.egg-info/
 %{python3_sitelib}/%{pypi_name}/
 
 %changelog
