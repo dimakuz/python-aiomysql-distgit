@@ -1,6 +1,10 @@
+%global with_python3 1
+
+# we don't want to provide private python extension libs in either the python2 or python3 dirs
+%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\\.so$
+
 %define name aiomysql
 %define version 0.0.20
-%define unmangled_version 0.0.20
 %define unmangled_version 0.0.20
 %define release 1
 
@@ -16,6 +20,27 @@ Prefix: %{_prefix}
 BuildArch: noarch
 Vendor: Nikolay Novik <nickolainovik@gmail.com>
 Url: https://github.com/aio-libs/aiomysql
+
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-pytest >= 2.8
+
+%prep
+%setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
+
+%build
+%py2_build
+%py3_build
+
+%install
+%py2_install
+%py3_install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files -f INSTALLED_FILES
+%defattr(-,root,root)
 
 %description
 aiomysql
@@ -336,17 +361,3 @@ Changes
 
 * Ported sqlalchemy optional support.
 
-%prep
-%setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
-
-%build
-python3 setup.py build
-
-%install
-python3 setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%files -f INSTALLED_FILES
-%defattr(-,root,root)
